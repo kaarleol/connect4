@@ -21,3 +21,10 @@ Lisäksi tekoälyalusta ei tosiaan vielä toimi ja kysymykseni odottaa kirjoitus
 ### Seuraavaksi
 
 Kunhan alusta saadaan toimimaan alkaa itse projektin teko. Ensiaskeleena on saada tekoäly yhdistettyä tekoälyalustaan sen testaamiseksi. Sen jälkeen koitan varmaan rakentaa jonkinlaisen evaluaatiofunktion ja aloittaa rekursiivisen hakuprosessin. Sen jälkeen varmaan alkaa itse algoritmiin perehtyminen ja sen tehostaminen
+
+### Tunnit
+
+Yhteensä noin 7h
+
+Reilu 3h aiheenvalintaan ja selvityksiin, about 3h tekoälyalustan kanssa tappeluun + muihin säätöihin. 
+Aloitusluentoa ei laskettuna
