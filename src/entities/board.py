@@ -1,6 +1,9 @@
 class Board:
-    def __init__(self):
-        self.board = [[' ' for _ in range(7)] for _ in range(6)]
+    def __init__(self, preset_board=None):
+        if preset_board:
+            self.board = preset_board
+        else:
+            self.board = [[' ' for _ in range(7)] for _ in range(6)]
 
     def print_board(self):
         for row in self.board:
@@ -57,3 +60,22 @@ class Board:
                 if cell == ' ':
                     return False
         return True
+
+    def is_column_full(self, col):
+        if col not in range(7):
+            print("Board: Incorrect column")
+            return False
+        for row in self.board:
+            if row[col] == ' ':
+                return False
+        return True
+
+    def get_possible_moves(self):
+        possible_moves = []
+        for col in range(7):
+            if not self.is_column_full(col):
+                possible_moves.append(col)
+        return possible_moves
+
+    def get_board(self):
+        return [row[:] for row in self.board]
