@@ -1,6 +1,6 @@
 class Game:
     def __init__(self, board):
-        self.board=board
+        self.board = board
         self.turn = 0
 
     def play(self, column):
@@ -11,7 +11,6 @@ class Game:
             return False
 
         self.turn += 1
-
 
     def check_win(self):
         piece = self.whose_turn()

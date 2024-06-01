@@ -2,12 +2,13 @@ from entities.game import Game
 from entities.board import Board
 from entities.ai import AI
 
+
 class App:
     def __init__(self):
         self.board = Board()
         self.game = Game(self.board)
-        self.boardState = self.game.board.get_board()
-        self.ai = AI(self.boardState)
+        self.board_state = self.game.board.get_board()
+        self.ai = AI(self.board_state)
 
     def run(self):
         print("Starting a new game")
@@ -22,13 +23,14 @@ class App:
             turn = self.game.whose_turn()
             if turn == 'X':
                 while True:
-                    col = input("Give the column you want to place a piece in (0-6)")
+                    col = input(
+                        "Give the column you want to place a piece in (0-6)")
                     try:
                         col = int(col)
                     except ValueError:
                         print(f"Error: '{col}' is not a valid integer")
                         continue
-                    
+
                     if col not in range(7):
                         print("Incorrect column")
                         continue
@@ -37,17 +39,17 @@ class App:
                         continue
                     break
             if turn == 'O':
-                self.ai.set_board(self.game.board.get_board())
-                move = self.ai.move()
-                if move:
+                move = self.ai.move(self.game.board.get_board(), 3)
+                print(move)
+                if move is not None:
                     val = self.game.play(move)
                     if val is False:
                         print("Main: AI tried making an illegal move")
                         break
+                else:
+                    print("Main: AI failed to return a move")
+                    break
 
-
-            
-            
 
 if __name__ == "__main__":
     game = App()

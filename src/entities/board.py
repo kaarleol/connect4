@@ -26,7 +26,6 @@ class Board:
         print("Board: Column is full")
         return False
 
-
     def check_win(self, piece):
         # Check rows for win
         for row in range(6):

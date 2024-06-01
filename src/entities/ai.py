@@ -2,37 +2,65 @@ from entities.board import Board
 import random
 
 class AI:
-    def __init__(self, boardState):
-        self.boardState = boardState
-        self.move_values = {'3': 0, '2': 0, '4': 0, '1': 0, '5': 0, '0': 0, '6': 0}
-        self.players_move = False
-        self.board = Board(boardState)
+    def __init__(self, board_state):
+        self.board_state = board_state
+        self.move_values = {'3': 0, '2': 0,
+                            '4': 0, '1': 0, '5': 0, '0': 0, '6': 0}
+        self.board = Board(board_state)
 
-    def set_board(self, boardState):
-        self.boardState = boardState
+    def set_board(self, board_state):
+        self.board_state = board_state
 
-    def move(self):
-        moves = self.board.get_possible_moves()
-        for i in moves:
-            board = Board(self.boardState)
-            self.move_values[str(i)] = self.evaluate_move(board, i)
+    def move(self, board_state, depth):
+        board = Board(board_state)
+        moves = board.get_possible_moves()
 
-        best_move = max(self.move_values, key=lambda k: self.move_values[k])
-        print(best_move)
-        try:
-            best_move = int(best_move)
-        except:
-            print("AI: error making a move")
-            return False
+        best_value, best_move = -1000000, None
+        for move in moves:
+            value = self.minimax(board_state, move, depth - 1, True)
+            print(f'move {move} value {value}')
+            if value > best_value:
+                best_value = value
+                best_move = move
         return best_move
 
-    def evaluate_move(self, board, i):
-        board.set_piece(i, 'O')
-        value = random.uniform(-10, 10)
-        if board.check_win('0'):
-            value = 1000
-        elif board.check_win('X'):
-            value = -1000
-        print(value)
+    def minimax(self, board_state, column, depth, maximizing_player):
+        board = Board(board_state)
+        if maximizing_player:
+            board.set_piece(column, 'O')
+        else:
+            board.set_piece(column, 'X')
 
-        return value
+        if depth == 0 or board.check_win('X') or board.check_win('O'):
+            return self.evaluate_move(board.get_board())
+        moves = board.get_possible_moves()
+
+        if not moves:
+            return 0, None
+
+        if maximizing_player:
+            best_value = -100000
+            best_move = None
+            for move in moves:
+                value = self.minimax(
+                    board.get_board(), move, depth - 1, False)
+                if value > best_value:
+                    best_value = value
+            return best_value
+        else:
+            best_value = 10000
+            for move in moves:
+                value = self.minimax(
+                    board.get_board(), move, depth - 1, True)
+                if value < best_value:
+                    best_value = value
+            return best_value
+
+    def evaluate_move(self, board_state):
+        board = Board(board_state)
+        if board.check_win('X'):
+            return -100000
+        elif board.check_win('O'):
+            return 100000
+
+        return random.uniform(-10, 10)
