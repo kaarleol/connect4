@@ -17,7 +17,7 @@ class AI:
 
         best_value, best_move = -1000000, None
         for move in moves:
-            value = self.minimax(board_state, move, depth - 1, True)
+            value = self.minimax(board_state, move, depth-1, True)
             print(f'move {move} value {value}')
             if value > best_value:
                 best_value = value
@@ -26,41 +26,48 @@ class AI:
 
     def minimax(self, board_state, column, depth, maximizing_player):
         board = Board(board_state)
+        board.set_board(board.get_board())
         if maximizing_player:
             board.set_piece(column, 'O')
         else:
             board.set_piece(column, 'X')
 
+        board.set_board(board.get_board())
+
         if depth == 0 or board.check_win('X') or board.check_win('O'):
-            return self.evaluate_move(board.get_board())
+            eval = self.evaluate_move(board.get_board())
+            return eval
         moves = board.get_possible_moves()
 
         if not moves:
-            return 0, None
+            return 0
 
-        if maximizing_player:
-            best_value = -100000
-            best_move = None
+        if maximizing_player is False:
+            best_value = -1000000
             for move in moves:
-                value = self.minimax(
-                    board.get_board(), move, depth - 1, False)
+                value = self.minimax(board.get_board(), move, depth - 1, True)
+                print(f'AI:s move: value for move {move} is {value}')
                 if value > best_value:
                     best_value = value
             return best_value
         else:
-            best_value = 10000
+            best_value = 1000000
             for move in moves:
-                value = self.minimax(
-                    board.get_board(), move, depth - 1, True)
+                value = self.minimax(board.get_board(), move, depth - 1, False)
+                print(f'Players move: value for move {move} is {value}')
                 if value < best_value:
                     best_value = value
             return best_value
 
     def evaluate_move(self, board_state):
         board = Board(board_state)
+        board.set_board(board.get_board())
+
         if board.check_win('X'):
+            print("player would win")
             return -100000
         elif board.check_win('O'):
+            print("ai would win")
             return 100000
 
         return random.uniform(-10, 10)

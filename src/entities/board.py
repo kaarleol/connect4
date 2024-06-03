@@ -78,3 +78,6 @@ class Board:
 
     def get_board(self):
         return [row[:] for row in self.board]
+
+    def set_board(self, board_state):
+        self.board = board_state

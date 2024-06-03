@@ -39,7 +39,7 @@ class App:
                         continue
                     break
             if turn == 'O':
-                move = self.ai.move(self.game.board.get_board(), 3)
+                move = self.ai.move(self.game.board.get_board(), 2)
                 print(move)
                 if move is not None:
                     val = self.game.play(move)
