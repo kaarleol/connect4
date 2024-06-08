@@ -16,4 +16,4 @@ Jos haluaa kehityksen aikaisia riippuvuuksia tarkkailla ne voi asentaa komennoll
 
 ## Tekoäly nyt
 
-Tekoälyn evaluaatio on melko yksinkertainen mutta jopa syvyydellä 5 yllättävän vaikea vastustaja kokemattomalle. Koita toki päihittää se :D
+Tekoälyn evaluaatio on melko yksinkertainen, mutta jopa syvyydellä 5 se on yllättävän vaikea vastustaja kokemattomalle. Koita toki päihittää se :D
