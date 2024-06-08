@@ -13,9 +13,11 @@ class Game:
         self.turn += 1
 
     def check_win(self):
-        piece = self.whose_turn()
-        if self.board.check_win(piece):
-            print(f'Player {piece} wins!')
+        if self.board.check_win('X'):
+            print('Player X wins!')
+            return True
+        elif self.board.check_win('O'):
+            print('Player O wins!')
             return True
         return False
 
