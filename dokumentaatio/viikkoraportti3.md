@@ -1,4 +1,4 @@
-# # Viikkoraportti 3
+# Viikkoraportti 3
 
 ### Tekemiset & ohjelma
 
