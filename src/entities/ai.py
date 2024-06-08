@@ -7,6 +7,7 @@ class AI:
         self.move_values = {'3': 0, '2': 0,
                             '4': 0, '1': 0, '5': 0, '0': 0, '6': 0}
         self.board = Board(board_state)
+        
 
     def set_board(self, board_state):
         self.board_state = board_state
@@ -46,7 +47,6 @@ class AI:
             best_value = -1000000
             for move in moves:
                 value = self.minimax(board.get_board(), move, depth - 1, True)
-                print(f'AI:s move: value for move {move} is {value}')
                 if value > best_value:
                     best_value = value
             return best_value
@@ -54,20 +54,33 @@ class AI:
             best_value = 1000000
             for move in moves:
                 value = self.minimax(board.get_board(), move, depth - 1, False)
-                print(f'Players move: value for move {move} is {value}')
                 if value < best_value:
                     best_value = value
             return best_value
 
     def evaluate_move(self, board_state):
+        heat_chart = [
+            [-1,0,1,2,1,0,-1],
+            [0,2,2,3,2,2,0],
+            [0,2,5,7,5,2,0],
+            [0,2,5,7,5,2,0],
+            [0,2,4,5,4,2,0],
+            [0,1,2,4,2,1,0],
+        ]
         board = Board(board_state)
-        board.set_board(board.get_board())
+
+        eval = 0
+        for i in range(6):
+            for j in range(7):
+                if board_state[i][j]== "X":
+                    eval -= heat_chart[i][j]
+                if board_state[i][j] == "O":
+                    eval += heat_chart[i][j]
 
         if board.check_win('X'):
-            print("player would win")
-            return -100000
+            return -100000 + random.uniform(-2, 2)
         elif board.check_win('O'):
-            print("ai would win")
-            return 100000
-
-        return random.uniform(-10, 10)
+            return 100000 + random.uniform(-2, 2)
+        
+        #some randomness to mix up the gameplay
+        return eval + random.uniform(-2, 2)
