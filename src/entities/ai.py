@@ -1,4 +1,6 @@
 import random
+import time
+
 from entities.board import Board
 
 
@@ -8,10 +10,26 @@ class AI:
         self.move_values = {'3': 0, '2': 0,
                             '4': 0, '1': 0, '5': 0, '0': 0, '6': 0}
         self.board = Board(board_state)
+        self.duration = 3 #how long the ai will have to look for best move
 
 
     def set_board(self, board_state):
         self.board_state = board_state
+
+    def iterative_search(self, board_state):
+        print("Starting AI")
+        start_time = time.time()
+        depth = 1
+        move = None
+
+        while time.time() - start_time < self.duration:
+            print(f'Depth: {depth}')
+            move, val = self.minimax(board_state, None, depth, -10000000, 10000000, True)
+            if val == 0 or val == 100000  or val == -100000:
+                return move
+            depth += 1
+        return move
+
 
     def minimax(self, board_state, column, depth, alpha, beta, maximizing_player):
 
