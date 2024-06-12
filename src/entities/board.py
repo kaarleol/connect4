@@ -70,8 +70,9 @@ class Board:
         return True
 
     def get_possible_moves(self):
+        move_order = [3,4,2,5,1,6,0]
         possible_moves = []
-        for col in range(7):
+        for col in move_order:
             if not self.is_column_full(col):
                 possible_moves.append(col)
         return possible_moves
@@ -81,3 +82,11 @@ class Board:
 
     def set_board(self, board_state):
         self.board = board_state
+
+    def get_signature(self):
+        signature = ''
+        for row in self.board:
+            for column in row:
+                signature += column    
+
+        return signature

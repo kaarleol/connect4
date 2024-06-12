@@ -1,3 +1,5 @@
+import time
+
 from entities.game import Game
 from entities.board import Board
 from entities.ai import AI
@@ -9,6 +11,7 @@ class App:
         self.game = Game(self.board)
         self.board_state = self.game.board.get_board()
         self.ai = AI(self.board_state)
+        self.duration = 3 #how long the ai will have to look for best move
 
     def run(self):
         print("Starting a new game")
@@ -39,8 +42,8 @@ class App:
                         continue
                     break
             if turn == 'O':
-                move = self.ai.move(self.game.board.get_board(), 5)
-                print(move)
+                move, val = self.iterative_search()
+                print(move, val)
                 if move is not None:
                     val = self.game.play(move)
                     if val is False:
@@ -50,6 +53,17 @@ class App:
                     print("Main: AI failed to return a move")
                     break
 
+    def iterative_search(self):
+        print("Starting AI")
+        start_time = time.time()
+        depth = 1
+        move = None
+
+        while time.time() - start_time < self.duration:
+            print(f'Depth: {depth}')
+            move = self.ai.minimax(self.game.board.get_board(), None, depth, True)
+            depth += 1
+        return move
 
 if __name__ == "__main__":
     game = App()
