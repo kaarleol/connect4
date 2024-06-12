@@ -18,7 +18,7 @@ class TestGame(unittest.TestCase):
                 self.assertEqual(board_State[i][j], ' ')
 
     def test_game_playes_correct_moves_and_pieces(self):
-        val = self.test_game.play(3)
+        self.test_game.play(3)
         self.test_game.play(3)
         self.test_game.play(3)
 

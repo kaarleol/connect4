@@ -42,8 +42,8 @@ class App:
                         continue
                     break
             if turn == 'O':
-                move, val = self.iterative_search()
-                print(move, val)
+                move = self.iterative_search()
+                print(move)
                 if move is not None:
                     val = self.game.play(move)
                     if val is False:
@@ -61,7 +61,9 @@ class App:
 
         while time.time() - start_time < self.duration:
             print(f'Depth: {depth}')
-            move = self.ai.minimax(self.game.board.get_board(), None, depth, True)
+            move, val = self.ai.minimax(self.game.board.get_board(), None, depth, -10000000, 10000000, True)
+            if val == 0 or val == 100000  or val == -100000:
+                return move
             depth += 1
         return move
 

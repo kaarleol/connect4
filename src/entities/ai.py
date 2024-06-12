@@ -13,7 +13,7 @@ class AI:
     def set_board(self, board_state):
         self.board_state = board_state
 
-    def minimax(self, board_state, column, depth, maximizing_player):
+    def minimax(self, board_state, column, depth, alpha, beta, maximizing_player):
 
         board = Board(board_state)
         board.set_board(board.get_board())
@@ -45,19 +45,24 @@ class AI:
         if maximizing_player:
             best_value = -1000000
             for move in moves:
-                _, value = self.minimax(board.get_board(), move, depth - 1, False)
+                _, value = self.minimax(board.get_board(), move, depth - 1, alpha, beta, False)
                 if value > best_value:
                     best_value = value
                     best_move = move
-            return best_move, best_value
+                alpha = max(alpha, value)
+                if beta <= alpha:
+                    break
         else:
             best_value = 1000000
             for move in moves:
-                _, value = self.minimax(board.get_board(), move, depth - 1, True)
+                _, value = self.minimax(board.get_board(), move, depth - 1, alpha, beta, True)
                 if value < best_value:
                     best_value = value
                     best_move = move
-            return best_move, best_value
+                beta = min(beta, value)
+                if beta <= alpha:
+                    break
+        return best_move, best_value
 
     def evaluate_move(self, board_state):
         heat_chart = [
