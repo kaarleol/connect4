@@ -22,7 +22,7 @@ class AI:
         while time.time() - start_time < self.duration:
             print(f'Depth: {depth}')
             move, val = self.minimax(board_state, None, depth, -10000000, 10000000, True)
-            if val == 0 or val == 100000 or val == -100000:
+            if val in (0, 100000, -100000):
                 return move, {}
             depth += 1
 
@@ -65,7 +65,8 @@ class AI:
 
         board_signature = board.get_signature()
         if board_signature in self.state_move_values:
-            move_scores = [(move, self.state_move_values[board_signature].get(str(move), 0)) for move in moves]
+            move_scores = [(move, self.state_move_values[board_signature].get(str(move), 0))
+                            for move in moves]
         else:
             move_scores = [(move, 0) for move in moves]
 
@@ -125,7 +126,7 @@ class AI:
 
         if board.check_win('X'):
             return -100000
-        elif board.check_win('O'):
+        if board.check_win('O'):
             return 100000
 
         # some randomness to mix up the gameplay

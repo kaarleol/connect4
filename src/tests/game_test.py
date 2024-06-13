@@ -103,7 +103,7 @@ class TestGame(unittest.TestCase):
 
         self.assertEqual(val, False)
         self.assertEqual(mock_print.call_count, 0)
-        
+
         self.test_game.play(5)
         val = self.test_game.check_win()
         self.assertEqual(val, False)
