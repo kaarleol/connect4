@@ -3,15 +3,12 @@ import time
 
 from entities.board import Board
 
-
 class AI:
     def __init__(self, board_state):
         self.board_state = board_state
-        self.move_values = {'3': 0, '2': 0,
-                            '4': 0, '1': 0, '5': 0, '0': 0, '6': 0}
         self.board = Board(board_state)
         self.duration = 3 #how long the ai will have to look for best move
-
+        self.state_move_values = {}
 
     def set_board(self, board_state):
         self.board_state = board_state
@@ -32,7 +29,6 @@ class AI:
 
 
     def minimax(self, board_state, column, depth, alpha, beta, maximizing_player):
-
         board = Board(board_state)
         board.set_board(board.get_board())
 
@@ -51,6 +47,10 @@ class AI:
 
         if depth == 0:
             evaluation = self.evaluate_move(board.get_board())
+            board_signature = board.get_signature()
+            if board_signature not in self.state_move_values:
+                self.state_move_values[board_signature] = {}
+            self.state_move_values[board_signature][str(column)] = evaluation
             return column, evaluation
 
         moves = board.get_possible_moves()
@@ -59,6 +59,14 @@ class AI:
             return column, 0
 
         best_value, best_move = -1000000, None
+
+        board_signature = board.get_signature()
+        if board_signature in self.state_move_values:
+            move_scores = [(move, self.state_move_values[board_signature].get(str(move), 0)) for move in moves]
+        else:
+            move_scores = [(move, 0) for move in moves]
+
+        move_scores.sort(key=lambda x: x[1], reverse=maximizing_player)
 
         if maximizing_player:
             best_value = -1000000
