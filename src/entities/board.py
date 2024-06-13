@@ -87,6 +87,6 @@ class Board:
         signature = ''
         for row in self.board:
             for column in row:
-                signature += column    
+                signature += column
 
         return signature
