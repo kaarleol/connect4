@@ -28,7 +28,7 @@ Itse evaluaatio on vielä aivan liian yksinkertainen ja haluan sitä parannella,
 
 Vaikka tiedän että tekoäly löytää voittavat siirrot syvyyshakunsa sisällä jne pitää testausta vielä tehdä paljon.
 
-Lisäksi monet tekoälyn metodit ovat todedlla pitkiä ja sotkuisiaa ja vaativat refaktorointia myös testaamisen helpottamiseksi. Tähän todennäköisesti kuluu viimeinen viikko dokumentaation parantamisen ohella.
+Lisäksi monet tekoälyn metodit ovat todella pitkiä ja sotkuisia ja vaativat refaktorointia myös testaamisen helpottamiseksi. Tähän todennäköisesti kuluu viimeinen viikko dokumentaation parantamisen ohella.
 
 ### Tunnit
 
