@@ -9,9 +9,6 @@ class AI:
 
         self.duration = 3  # how long the AI will have to look for the best move
 
-    def set_board(self, board_state):
-        self.board_state = board_state
-
     def iterative_search(self, board_state):
         print("Starting AI")
         start_time = time.time()
@@ -22,7 +19,7 @@ class AI:
             print(f'Depth: {depth}')
             move, val = self.minimax(board_state, None, depth, -10000000, 10000000, True)
             if val in (0.00000001, 100000, -100000):
-                return move
+                return move, val
             depth += 1
 
         board = Board(board_state)
@@ -30,8 +27,9 @@ class AI:
 
         #clearing best moves for the next turn
         self.state_best_move = {}
+        #print(self.state_best_move)
 
-        return move
+        return move, val
 
     def minimax(self, board_state, column, depth, alpha, beta, maximizing_player):
         board = Board(board_state)
@@ -96,7 +94,7 @@ class AI:
 
         return best_move, best_value
 
-    #the evaluations are my guesses
+    #the evaluations are my guesses for what could be valuable
     def evaluate_move(self, board_state):
         heat_chart = [
             [-1, 0, 1, 2, 1, 0, -1],
@@ -107,11 +105,6 @@ class AI:
             [0, 1, 2, 4, 2, 1, 0],
         ]
         board = Board(board_state)
-
-        if board.check_win('X'):
-            return -100000
-        if board.check_win('O'):
-            return 100000
 
         evaluation = 0
         for i in range(6):
@@ -147,7 +140,7 @@ class AI:
                         partial_eval = 0
                         break
                 #second player wants rows on every second line in case of endgame
-                #row are read from top to bottom so row=0 in this case would be the 6th row
+                #rows are read from top to bottom so row=0 in this case would be the 6th row
                 if piece == 'O' and row % 2 == 0:
                     partial_eval = partial_eval*2
                 elif piece == 'X' and (row + 1) == 0:
