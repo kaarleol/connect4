@@ -104,7 +104,6 @@ class AI:
             [0, 2, 4, 5, 4, 2, 0],
             [0, 1, 2, 4, 2, 1, 0],
         ]
-        board = Board(board_state)
 
         evaluation = 0
         for i in range(6):
@@ -125,7 +124,7 @@ class AI:
         else:
             opponent = 'O'
 
-        eval = 0
+        evaluation = 0
 
         #rows
         for row in range(6):
@@ -145,7 +144,7 @@ class AI:
                     partial_eval = partial_eval*2
                 elif piece == 'X' and (row + 1) == 0:
                     partial_eval = partial_eval*2
-                eval += partial_eval
+                evaluation += partial_eval
 
         #columns
         for column in range(7):
@@ -159,7 +158,7 @@ class AI:
                     if board_state[row + i][column] == opponent:
                         partial_eval = 0
                         break
-                eval += partial_eval
+                evaluation += partial_eval
 
         #up-right -diagonal
         for row in range(3,6):
@@ -178,7 +177,7 @@ class AI:
                     if board_state[row - i][column + i] == opponent:
                         partial_eval = 0
                         break
-                eval += partial_eval
+                evaluation += partial_eval
 
         #down-right -diagonal
         for row in range(3):
@@ -197,6 +196,6 @@ class AI:
                     if board_state[row + i][column + i] == opponent:
                         partial_eval = 0
                         break
-                eval += partial_eval
+                evaluation += partial_eval
 
-        return eval
+        return evaluation
