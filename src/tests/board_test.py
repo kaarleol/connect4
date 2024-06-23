@@ -255,4 +255,4 @@ class TestBoard(unittest.TestCase):
     @patch('builtins.print')
     def test_print_called(self, mock_print):
         self.test_board.print_board()
-        self.assertEqual(mock_print.call_count, 7)
+        self.assertEqual(mock_print.call_count, 8)

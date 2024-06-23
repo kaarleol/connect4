@@ -9,6 +9,7 @@ class Board:
         for row in self.board:
             print('| ' + ' | '.join(row) + ' |')
         print('-' * (len(self.board[0]) * 4 + 1))
+        print('  0   1   2   3   4   5   6  ')
 
     def set_piece(self, col, piece):
         if piece not in ['X', 'O']:
@@ -25,6 +26,15 @@ class Board:
 
         print("Board: Column is full")
         return False
+
+    def clear_piece(self, col):
+        for row in reversed(self.board):
+            if row[col] == 'X' or row[col] == 'O':
+                row[col] = ' '
+                return True
+        print("Board: Error, empty column")
+        return False
+
 
     def check_win(self, piece):
         # Check rows for win

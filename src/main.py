@@ -39,7 +39,7 @@ class App:
                         continue
                     break
             if turn == 'O':
-                move, _ = self.ai.iterative_search(self.game.board.get_board())
+                move = self.ai.iterative_search(self.game.board.get_board())
                 print(move)
                 #print(move_order)
 
