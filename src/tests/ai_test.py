@@ -155,3 +155,18 @@ class TestBoard(unittest.TestCase):
 
         _, val = self.test_ai.iterative_search(board_preset)
         self.assertEqual(val, -100000)
+
+
+    def test_iterative_search_times_out(self):
+        self.test_ai.duration = 1
+        board_preset = [
+            [' ',' ',' ',' ',' ',' ',' ',],
+            [' ',' ',' ',' ',' ',' ',' ',],
+            [' ',' ',' ',' ',' ',' ',' ',],
+            [' ',' ',' ',' ',' ',' ',' ',],
+            [' ',' ',' ',' ',' ',' ',' ',],
+            [' ',' ',' ','X',' ',' ',' ',],
+        ]
+        move, val = self.test_ai.iterative_search(board_preset)
+        self.assertEqual(True, move is not None)
+        self.assertEqual(True, val is not None)

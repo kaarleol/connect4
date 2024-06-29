@@ -142,7 +142,7 @@ class AI:
                 #rows are read from top to bottom so row=0 in this case would be the 6th row
                 if piece == 'O' and row % 2 == 0:
                     partial_eval = partial_eval*2
-                elif piece == 'X' and (row + 1) == 0:
+                if piece == 'X' and (row + 1) == 0:
                     partial_eval = partial_eval*2
                 evaluation += partial_eval
 

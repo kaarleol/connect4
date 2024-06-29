@@ -27,15 +27,6 @@ class Board:
         print("Board: Column is full")
         return False
 
-    def clear_piece(self, col):
-        for row in reversed(self.board):
-            if row[col] == 'X' or row[col] == 'O':
-                row[col] = ' '
-                return True
-        print("Board: Error, empty column")
-        return False
-
-
     def check_win(self, piece):
         # Check rows for win
         for row in range(6):
