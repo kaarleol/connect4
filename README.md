@@ -12,8 +12,25 @@ Projektin riippuvuudet ovat tällä hetkellä melko yksinkertaisia, lähinnä py
 
 Sovellus käynnistyy kirjoittamalla pääkansiossa komennon ```python3 scr/main.py ```
 
-Jos haluaa kehityksen aikaisia riippuvuuksia tarkkailla ne voi asentaa komennolla ```poetry install --with dev```
+Pelin aikana siirrot saa tehtyä yksinkertaisesti sarakkeita vastaavilla numeroilla (0-6)
 
-## Tekoäly nyt
 
-Tekoälyn evaluaatio on melko yksinkertainen, mutta jopa syvyydellä 5 se on yllättävän vaikea vastustaja kokemattomalle. Koita toki päihittää se :D
+---
+
+Yksikkötestit voi ajaa asentamalla kehityksen aikaiset riippuvuudet komennolla ```poetry install --with dev```,
+
+käynnistämällä virtuaaliympäristön ```poetry shell ```,
+
+ja suorittamalla virtuaaliympäristössä komennon ```pytest src```,
+
+---
+
+Testikattavuutta voi tutkia komennoilla ```coverage run --branch -m pytest src ```
+
+ja ```coverage html ``` ja avaamalla coveragen luoman tiedoston index.html (htmlcov/index.html) selaimessa. 
+
+
+Pylint on myös käytössä ja sitä voi tarkkailla komennolla ```pylint src ```
+
+
+
