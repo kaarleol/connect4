@@ -4,6 +4,8 @@
 
 [Testaus](https://github.com/kaarleol/connect4/blob/main/dokumentaatio/testaus.md)
 
+[Toteutus](https://github.com/kaarleol/connect4/blob/main/dokumentaatio/toteutus.md)
+
 ## Käynnistysohjeet
 
 Projektin riippuvuudet ovat tällä hetkellä melko yksinkertaisia, lähinnä python asennettuna.
