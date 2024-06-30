@@ -2,8 +2,6 @@
 
 [Määrittely](https://github.com/kaarleol/connect4/blob/main/dokumentaatio/maarittely.md)
 
-[Viikkoraportti](https://github.com/kaarleol/connect4/blob/main/dokumentaatio/viikkoraportti6.md)
-
 [Testaus](https://github.com/kaarleol/connect4/blob/main/dokumentaatio/testaus.md)
 
 ## Käynnistysohjeet
