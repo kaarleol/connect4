@@ -2,14 +2,43 @@ import time
 from entities.board import Board
 
 class AI:
+    """
+    AI
+
+    The opponent human plays against that uses minimax
+
+    Attributes:
+        board_state (list): The current state of the board
+        state_best_move (dict): A dictionary storing the best moves for each board state,
+        used for move sorting
+        board (Board): An instance of the Board class
+        duration (int): Duration (in seconds) the AI has to find the best move
+    """
     def __init__(self, board_state):
+        """
+        Initializes a new instance of AI
+
+        Args:
+            board_state (list): The boardstate you want AI to play from
+        """
         self.board_state = board_state
         self.state_best_move = {}
         self.board = Board(board_state)
 
-        self.duration = 3  # how long the AI will have to look for the best move
+        self.duration = 3
 
     def iterative_search(self, board_state):
+        """
+        The main method of the AI that the gameloop in main.py calls
+
+        Performs an iterative deepening search to find the best move
+
+        Args:
+            board_state (list): The current state of the board
+
+        Returns:
+            int: The column index of the best move
+        """
         print("Starting AI")
         start_time = time.time()
         depth = 1
@@ -32,6 +61,20 @@ class AI:
         return move, val
 
     def minimax(self, board_state, column, depth, alpha, beta, maximizing_player):
+        """
+        Implements the minimax algorithm with alpha-beta pruning
+
+        Args:
+            board_state (list): The current state of the board
+            column (int): The column where the piece is placed
+            depth (int): The current depth of the search
+            alpha (float): The alpha value for alpha-beta pruning
+            beta (float): The beta value for alpha-beta pruning
+            maximizing_player (bool): True if the current player is maximizing, False otherwise
+
+        Returns:
+            tuple: The best move and its associated value
+        """
         board = Board(board_state)
         board.set_board(board.get_board())
 
@@ -96,6 +139,15 @@ class AI:
 
     #the evaluations are my guesses for what could be valuable
     def evaluate_move(self, board_state):
+        """
+        Evaluates the current board state
+
+        Args:
+            board_state (list): The current state of the board
+
+        Returns:
+            float: The evaluation score of the board
+        """
         heat_chart = [
             [-1, 0, 1, 2, 1, 0, -1],
             [0, 2, 2, 3, 2, 2, 0],
@@ -119,6 +171,19 @@ class AI:
         return evaluation
 
     def evaluate_open_lines(self, board_state, piece):
+        '''
+        Helper function for evaluate_move
+
+        Evaluates the position of the given player. 
+        Checks all directions for connections or open spaces
+
+        Args:
+            board_state (list): The current state of the board
+            piece ('X' or 'O'): The player whose position is 
+        Returns:
+            number: The evaluation score of the board
+
+        '''
         if piece == 'O':
             opponent = 'X'
         else:

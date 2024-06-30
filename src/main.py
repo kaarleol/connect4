@@ -4,13 +4,29 @@ from entities.ai import AI
 
 
 class App:
+    '''
+    The main gameloop that handles moves & connection to the AI and connections to game & board
+
+        Attributes:
+            board (class): Connection to Board class
+            game (class): Connection to Game class
+            board_state (list): Current state of the game
+            ai (class): Connection to AI class
+
+    '''
     def __init__(self):
+        """
+        Initializes a new game
+        """
         self.board = Board()
         self.game = Game(self.board)
         self.board_state = self.game.board.get_board()
         self.ai = AI(self.board_state)
 
     def run(self):
+        """
+        Main game loop
+        """
         print("Starting a new game")
         while True:
             self.board.print_board()
