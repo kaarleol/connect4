@@ -61,5 +61,7 @@ Käytin sitä myös joihinkin lambda-funktioihin jotka eivät kuitenkaan pääty
 ### Lähteet
 
 [Wikipedia minimax](https://en.wikipedia.org/wiki/Minimax), pseudokoodi + algoritmin ymmärtäminen
+
 [Wikipedia alpha-beta-pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning), pseudokoodi + algoritmin ymmärtäminen
+
 [Connect4 solver](https://connect4.gamesolver.org/) eri pelitilanteiden etsimiseen testejä varten
